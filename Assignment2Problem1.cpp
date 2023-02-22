@@ -11,7 +11,7 @@
 #define EATER_GUEST 0
 
 /*
- * The solution we use assumes that one guest
+ * The solution assumes that one guest
  * is the "eater" guest. This guest always eats the
  * cupcake. Every other guest will ask for the cupcake
  * to be replenished, but only the first time it is
