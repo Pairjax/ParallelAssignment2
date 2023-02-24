@@ -9,7 +9,7 @@ This is a series of journeys through a friendly minoutar's maze! In order to com
 ## Problem 1
 The solution assumes that one guest is the "eater" guest. This guest always eats the cupcake. Every other guest will ask for the cupcake to be replenished, but only the first time it is missing. Thus, when the "eater" has seen N replenished cupcakes, they can assume everyone has visited.
 
-In order to achieve this, each thread loops infinitely until a flag is raised for them to go (held in a boolean array). Then, after they are done with their visit, they calculate the next thread's starting point.
+In order to achieve this, each thread loops infinitely until a flag is raised for them to go (int holding guest #). Then, after they are done with their visit, they calculate the next thread's starting point. We also ignore any guests other than the eater that have already seen the lack of cupcake to save computational time.
 
 ## Problem 2
 The solution asumes the third strategy is the best option. Doing this places each guest in a FIFO queue, where each guest then views the vase one at a time, before notifying the next guest by removing itself from the queue. Each thread has an associated ID, where they wait for their thread's ID to appear.
