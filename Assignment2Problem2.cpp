@@ -20,7 +20,7 @@
  * wait for their thread's ID to appear.
  */
 
-#define NUM_GUESTS 30
+#define NUM_GUESTS 100
 
 std::queue<int> guestQueue;
 
@@ -29,7 +29,6 @@ void run_guest_thread(int threadId) {
 
   while(true) {
     if (guestQueue.front() == threadId) {
-      std::cout << "Guest " << threadId + 1 << " has viewed the vase!" << std::endl;
       guestQueue.pop();
       return;
     }
@@ -43,9 +42,17 @@ int main() {
     guestThreads[i] = std::thread(run_guest_thread, i);
   }
 
+  auto begin_execution = std::chrono::high_resolution_clock::now();
+
   for (auto& thread : guestThreads) {
     thread.join();
   }
+
+  auto stop_execution = std::chrono::high_resolution_clock::now();
+  auto execution_time = std::chrono::duration_cast<std::chrono::microseconds>(
+      stop_execution - begin_execution);
+
+  std::cout << "All guests have viewed the vase in " << execution_time.count() << " microseconds!" << std::endl;
 
   return 0;
 }
